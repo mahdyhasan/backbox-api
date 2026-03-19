@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.models.database import init_db
 from app.api.v1 import ingest, query, generate
-from app.api.admin import apps, clients, providers, usage
+from app.api.admin import apps, clients, providers, usage, providers_v2
 
 app = FastAPI(
     title="Black Box API",
@@ -39,6 +39,7 @@ app.include_router(generate.router, prefix="/v1", tags=["generation"])
 app.include_router(apps.router, prefix="/admin/v1", tags=["admin-apps"])
 app.include_router(clients.router, prefix="/admin/v1", tags=["admin-clients"])
 app.include_router(providers.router, prefix="/admin/v1", tags=["admin-providers"])
+app.include_router(providers_v2.router, prefix="/admin/v2", tags=["admin-providers-v2"])
 app.include_router(usage.router, prefix="/admin/v1", tags=["admin-usage"])
 
 
